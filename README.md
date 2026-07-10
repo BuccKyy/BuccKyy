@@ -1,16 +1,16 @@
-<!-- Colorful profile README. Powered by public generator services (no build step). -->
-
-<a href="https://github.com/BuccKyy">
-  <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:8E2DE2,50:4A00E0,100:00C9FF&height=200&section=header&text=Hi%20there%2C%20I'm%20BuccKyy%20👋&fontSize=42&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Biomedical%20Signal%20Processing%20%C2%B7%20ML%2FDL%20%C2%B7%20IoT%20%26%20Embedded&descSize=18&descAlignY=58" alt="header"/>
-</a>
+<!-- Hero banner + footer are self-hosted SVGs in /assets — no third-party service, never breaks. -->
 
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&duration=3000&pause=1000&color=8E2DE2&center=true&vCenter=true&width=600&lines=Cuffless+blood+pressure+from+PPG+signals;Deep+learning+for+physiological+data;Edge+AI+on+STM32+%2B+MAX30102;Turning+raw+sensors+into+insight" alt="typing"/>
+  <img width="100%" src="./assets/banner.svg" alt="BuccKyy — Cuffless BP · PPG · Edge AI"/>
 </p>
 
 <p align="center">
-  <img src="https://komarev.com/ghpvc/?username=BuccKyy&label=Profile%20views&color=8E2DE2&style=for-the-badge" alt="views"/>
-  <img src="https://img.shields.io/github/followers/BuccKyy?label=Follow&style=for-the-badge&color=4A00E0" alt="followers"/>
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=20&duration=3000&pause=1000&color=22D3EE&center=true&vCenter=true&width=620&lines=Cuffless+blood+pressure+from+PPG+signals;Deep+learning+for+physiological+data;Edge+AI+on+STM32+%2B+MAX30102;Turning+raw+sensors+into+insight" alt="typing"/>
+</p>
+
+<p align="center">
+  <img src="https://komarev.com/ghpvc/?username=BuccKyy&label=Profile%20views&color=22d3ee&style=flat-square" alt="views"/>
+  <img src="https://img.shields.io/github/followers/BuccKyy?label=Follow&style=flat-square&color=5eead4&labelColor=0891b2" alt="followers"/>
 </p>
 
 ---
@@ -55,17 +55,15 @@
 ### 📊 GitHub Stats
 
 <p align="center">
-  <img height="180em" src="https://github-readme-stats.vercel.app/api?username=BuccKyy&show_icons=true&theme=radical&include_all_commits=true&count_private=true&hide_border=true&bg_color=0D1117&title_color=8E2DE2&icon_color=00C9FF"/>
-  <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=BuccKyy&layout=compact&theme=radical&hide_border=true&bg_color=0D1117&title_color=8E2DE2&langs_count=8"/>
+  <img height="165em" src="https://github-readme-stats.vercel.app/api?username=BuccKyy&show_icons=true&theme=chartreuse-dark&include_all_commits=true&count_private=true&hide_border=true&bg_color=05080f&title_color=22d3ee&icon_color=5eead4&text_color=cbd5e1"/>
+  <img height="165em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=BuccKyy&layout=compact&theme=chartreuse-dark&hide_border=true&bg_color=05080f&title_color=22d3ee&text_color=cbd5e1&langs_count=8"/>
 </p>
 
 <p align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=BuccKyy&theme=radical&hide_border=true&background=0D1117&stroke=8E2DE2&ring=00C9FF&fire=00C9FF&currStreakLabel=8E2DE2" alt="streak"/>
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=BuccKyy&theme=dark&hide_border=true&background=05080f&stroke=22d3ee&ring=22d3ee&fire=5eead4&currStreakLabel=22d3ee&sideLabels=cbd5e1&dates=64748b" alt="streak"/>
 </p>
 
-<p align="center">
-  <img src="https://github-profile-trophy.vercel.app/?username=BuccKyy&theme=radical&no-frame=true&no-bg=true&margin-w=4&row=1&column=7" alt="trophies"/>
-</p>
+> If a stats card ever shows blank, its host (vercel) is rate-limited — refresh in a minute. The banner and footer are self-hosted SVGs and always render.
 
 ---
 
@@ -81,5 +79,5 @@
 ---
 
 <p align="center">
-  <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:00C9FF,50:4A00E0,100:8E2DE2&height=120&section=footer" alt="footer"/>
+  <img width="100%" src="./assets/footer.svg" alt=""/>
 </p>
