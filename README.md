@@ -10,6 +10,10 @@
 </p>
 
 <p align="center">
+  <a href="https://bucckyy.github.io"><img src="./assets/cta-portfolio.svg" width="420" alt="Enter portfolio" /></a>
+</p>
+
+<p align="center">
   <a href="https://github.com/BuccKyy?tab=repositories"><img src="./assets/cta-repos.svg" width="112" alt="Repositories" /></a>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="mailto:trantrungduc313@gmail.com"><img src="./assets/cta-contact.svg" width="112" alt="Contact" /></a>
