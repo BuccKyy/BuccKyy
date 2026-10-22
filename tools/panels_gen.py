@@ -110,11 +110,12 @@ def frame(w, h, rx, pal, uri, seed, extra=""):
 
 # ---------------------------------------------------------------- banners
 BANNERS = [
-    ("sec-01-pilot.svg", "_PILOT", "SEC.01 // CREW FILE", "sunset", ("kv4", .05, .02, .9), 11),
-    ("sec-02-systems.svg", "_SYSTEMS", "SEC.02 // LOADOUT", "neon", ("kv2", .0, .10, 1.0), 23),
-    ("sec-03-missions.svg", "_MISSIONS", "SEC.03 // EPISODE LOG", "dawn", ("kv4", .0, .27, 1.0), 37),
-    ("sec-04-telemetry.svg", "_TELEMETRY", "SEC.04 // LIVE FEED", "ocean", ("kv2", .0, .38, 1.0), 41),
-    ("sec-05-comms.svg", "_COMMS", "SEC.05 // OPEN CHANNEL", "fire", ("kv4", .0, .45, 1.0), 53),
+    ("sec-01-pilot.svg", "_PILOT", "01 // ABOUT ME", "sunset", ("kv4", .05, .02, .9), 11),
+    ("sec-06-experience.svg", "_EXPERIENCE", "02 // EXPERIENCE", "aurora", ("kv4", .0, .60, 1.0), 61),
+    ("sec-02-systems.svg", "_SYSTEMS", "03 // SKILLS", "neon", ("kv2", .0, .10, 1.0), 23),
+    ("sec-03-missions.svg", "_MISSIONS", "04 // PROJECTS", "dawn", ("kv4", .0, .27, 1.0), 37),
+    ("sec-04-telemetry.svg", "_TELEMETRY", "05 // STATS", "ocean", ("kv2", .0, .38, 1.0), 41),
+    ("sec-05-comms.svg", "_COMMS", "06 // CONTACT", "fire", ("kv4", .0, .45, 1.0), 53),
 ]
 
 
@@ -188,12 +189,12 @@ def systems():
 
 # ---------------------------------------------------------------- missions
 MISSIONS = [
-    ("01", "Deep-PPG-Research-Core", "End-to-end deep learning for PPG to blood pressure.", "PYTHON · PYTORCH", "sunset", ("kv4", .0, .02, .75)),
-    ("02", "Cuffless-BP-IoT-System", "Real-time cuffless BP with on-device inference.", "C · EDGE AI", "neon", ("kv2", .0, .05, .9)),
+    ("01", "Deep-PPG-Research-Core", "End-to-end research framework for PPG-based BP prediction.", "PYTHON · PYTORCH", "sunset", ("kv4", .0, .02, .75)),
+    ("02", "Cuffless-BP-IoT-System", "Real-time cuffless BP with edge AI on STM32 + Android.", "C · EDGE AI", "neon", ("kv2", .0, .05, .9)),
     ("03", "Video-Translation-Tool", "AI-powered video translation pipeline.", "PYTHON · LLM", "dawn", ("kv4", .25, .30, .7)),
     ("04", "prompt-master-for-codex", "Turns rough requests into scoped, testable work.", "PYTHON · CODEX", "fire", ("kv4", .3, .14, .7)),
-    ("05", "Medical Clinic Booking", "Ultrasound clinic booking system.", "PHP · MYSQL", "ocean", ("kv2", .1, .30, .8)),
-    ("06", "IoT Data Pipeline", "Signal capture to model-ready dataset.", "JUPYTER · PYTHON", "aurora", ("kv3", .0, .20, 1.0)),
+    ("05", "PPG2BP-Deep-Learning", "CNN-LSTM, U-Net, ResNet, Transformer models for BP from PPG.", "PYTHON · TENSORFLOW", "ocean", ("kv2", .1, .30, .8)),
+    ("06", "IoT Data Pipeline", "STM32 + Android pipeline: PPG capture to model-ready data.", "JUPYTER · PYTHON", "aurora", ("kv3", .0, .20, 1.0)),
 ]
 
 
@@ -213,7 +214,7 @@ def missions():
 
 
 # ---------------------------------------------------------------- comms
-COMMS = [("GITHUB", "BuccKyy", "sunset", ("kv4", .5, .05, .5)), ("LINKEDIN", "in/duc-tran", "ocean", ("kv2", .2, .2, .6)),
+COMMS = [("GITHUB", "BuccKyy", "sunset", ("kv4", .5, .05, .5)), ("LINKEDIN", "Tran Trung Duc", "ocean", ("kv2", .2, .2, .6)),
          ("WEBSITE", "bucckyy.github.io", "neon", ("kv2", .1, .05, .7)), ("EMAIL", "trantrungduc313", "fire", ("kv4", .1, .55, .6))]
 
 
@@ -228,10 +229,57 @@ def comms():
         (A / f"panel-link-{k.lower()}.svg").write_text(wrap(w, h, body, common_defs(w, h, 8, TINT[pal], acc), label=f"{k} {v}"))
 
 
+EXPERIENCE = [
+    ("01", "AI Engineer / Agent Builder", "MaxflowAI  ·  Ho Chi Minh City", "2026 - PRESENT", "sunset", ("kv4", .0, .02, 1.0),
+     ["Built multi-agent systems for real clients: event ops, B2B sales automation, inventory logistics, email pipelines, HR.",
+      "Python + JSON orchestration, event triggers, scheduled jobs, CRM / SMS / SMTP connectors, Playwright QA scripts."]),
+    ("02", "AI Engineer Intern", "ITR VN  ·  Ho Chi Minh City", "NOV 2024 - JAN 2025", "neon", ("kv2", .0, .05, 1.0),
+     ["PPG2BP-Net for cuffless BP: SBP MAE 9.76 ± 8.99 mmHg, DBP MAE 5.25 ± 5.26 mmHg on MIMIC-III.",
+      "NumPy vectorisation cut processing latency ~40%; built an STM32 + MAX30102 + Bluetooth prototype."]),
+    ("03", "Product Reviewer / QA Collaborator", "SNOW Vietnam  ·  Ho Chi Minh City", "APR - OCT 2025", "fire", ("kv4", .0, .33, 1.0),
+     ["Reviewed AI AR filters and computer-vision effects; found low-light and occlusion failures.",
+      "Documented defect patterns for the CV research team to improve output quality."]),
+]
+
+
+def experience():
+    w, h = 1000, 150
+    for n, role, org, dates, pal, (k, x, y, wf), bullets in EXPERIENCE:
+        acc = ACC[pal]
+        dw = 24 + len(dates) * 9
+        body = (frame(w, h, 6, pal, photo(k, x, y, wf, w, h, q=74), int(n) * 19) +
+                f'<text x="26" y="40" font-size="40" letter-spacing="1.5" fill="#fff" stroke="#12061F" stroke-width="1.2" paint-order="stroke">{role}</text>'
+                f'<text x="26" y="66" font-size="19" letter-spacing="3" fill="{acc}" stroke="#12061F" stroke-width=".9" paint-order="stroke">{org.upper()}</text>'
+                f'<rect x="{w - dw - 24}" y="18" width="{dw}" height="26" rx="13" fill="{acc}"/>'
+                f'<text x="{w - 24 - dw / 2}" y="37" font-size="16" letter-spacing="2" text-anchor="middle" fill="#1A0830">{dates}</text>'
+                f'<text x="26" y="100" font-size="21" fill="#fff" stroke="#12061F" stroke-width="1" paint-order="stroke">▸ {bullets[0]}</text>'
+                f'<text x="26" y="128" font-size="21" fill="#fff" stroke="#12061F" stroke-width="1" paint-order="stroke">▸ {bullets[1]}</text>' + brackets(w, h, acc, .9, 7, 12))
+        (A / f"panel-exp-{n}.svg").write_text(wrap(w, h, body, common_defs(w, h, 6, TINT[pal], acc), label=f"{role} at {org}"))
+
+
+def awards():
+    w, h = 1000, 120
+    items = [("AWARD  ·  2025", "VPBank Technology Hackathon", "Senior Track", "#FFD56A"),
+             ("AWARD  ·  2025", "BME Innovation Competition", "Team Lead, IoT BP monitor", "#7FE7FF"),
+             ("EDUCATION  ·  2021 - 2025", "B.Eng. Electronics &amp; Telecom", "VNU-HCM  ·  GPA 3.4 / 4.0", "#FF7AA8")]
+    cw = w // 3
+    cols = ""
+    for i, (tag, t1, t2, c) in enumerate(items):
+        x = 24 + i * cw
+        cols += (f'<text x="{x}" y="34" font-size="15" letter-spacing="4" fill="{c}" stroke="#12061F" stroke-width=".8" paint-order="stroke">{tag}</text>'
+                 f'<text x="{x}" y="68" font-size="24" fill="#fff" stroke="#12061F" stroke-width="1" paint-order="stroke">{t1}</text>'
+                 f'<text x="{x}" y="96" font-size="19" fill="#fff" opacity=".95" stroke="#12061F" stroke-width=".9" paint-order="stroke">{t2}</text>')
+        if i:
+            cols += f'<rect x="{i * cw - 8}" y="20" width="1" height="{h - 40}" fill="#fff" opacity=".35"/>'
+    body = frame(w, h, 6, "dawn", photo("kv4", .0, .48, 1.0, w, h, q=72), 71) + cols + brackets(w, h, "#FFD56A", .9, 7, 12)
+    (A / "panel-awards.svg").write_text(wrap(w, h, body, common_defs(w, h, 6, TINT["dawn"], "#FFD56A"), label="Awards and education"))
+
+
 def ctas():
     specs = [("cta-portfolio.svg", 1000, 110, "SEC.00 // LAUNCH", "ENTER PORTFOLIO", "sunset", ("kv4", .0, .05, 1.0), 62),
-             ("cta-repos.svg", 498, 100, "ARCHIVE", "REPOSITORIES", "neon", ("kv2", .1, .1, .8), 44),
-             ("cta-contact.svg", 498, 100, "OPEN CHANNEL", "CONTACT", "fire", ("kv4", .2, .5, .7), 44)]
+             ("cta-repos.svg", 332, 100, "ARCHIVE", "REPOSITORIES", "neon", ("kv2", .1, .1, .8), 38),
+             ("cta-cv.svg", 332, 100, "RESUME // PDF", "DOWNLOAD CV", "dawn", ("kv4", .3, .25, .7), 38),
+             ("cta-contact.svg", 332, 100, "OPEN CHANNEL", "CONTACT", "fire", ("kv4", .2, .5, .7), 38)]
     for name, w, h, tag, title, pal, (k, x, y, wf), fs in specs:
         acc = ACC[pal]
         body = (frame(w, h, 8, pal, photo(k, x, y, wf, w, h, q=76), len(name)) +
@@ -248,6 +296,8 @@ if __name__ == "__main__":
     systems()
     missions()
     comms()
+    experience()
+    awards()
     ctas()
     sizes = {p.name: p.stat().st_size // 1024 for p in sorted(A.glob("*.svg"))}
     print(sizes)

@@ -13,8 +13,9 @@
 
 <table width="100%">
 <tr>
-<td width="50%"><a href="https://github.com/BuccKyy?tab=repositories"><img src="./assets/cta-repos.svg" width="100%" alt="Repositories" /></a></td>
-<td width="50%"><a href="mailto:trantrungduc313@gmail.com"><img src="./assets/cta-contact.svg" width="100%" alt="Contact" /></a></td>
+<td width="33%"><a href="https://github.com/BuccKyy?tab=repositories"><img src="./assets/cta-repos.svg" width="100%" alt="Repositories" /></a></td>
+<td width="33%"><a href="https://bucckyy.github.io/TranTrungDuc-AI-Engineer-CV.pdf"><img src="./assets/cta-cv.svg" width="100%" alt="Download CV (PDF)" /></a></td>
+<td width="33%"><a href="mailto:trantrungduc313@gmail.com"><img src="./assets/cta-contact.svg" width="100%" alt="Contact" /></a></td>
 </tr>
 </table>
 
@@ -23,6 +24,13 @@
 <img width="100%" src="./assets/panel-pilot.svg" alt="Pilot data: BuccKyy, AI Engineer at MaxflowAI, Ho Chi Minh City, open to remote AI engineering roles" />
 
 > **PILOT LOG.** I build **LLM agents that survive production**: routing, tool calls, structured outputs, validation and fallback loops that fail visibly instead of silently. I train deep models for physiological signals, ship the whole line from data to model to orchestration to edge, and like the hard part: getting neural nets to run **on-device**, not just in a notebook.
+
+<img width="100%" src="./assets/sec-06-experience.svg" alt="_EXPERIENCE" />
+
+<img width="100%" src="./assets/panel-exp-01.svg" alt="AI Engineer / Agent Builder at MaxflowAI, 2026 to present: multi-agent systems for real clients across event ops, B2B sales automation, inventory logistics, email pipelines and HR; Python and JSON orchestration, event triggers, scheduled jobs, CRM, SMS and SMTP connectors, Playwright QA." />
+<img width="100%" src="./assets/panel-exp-02.svg" alt="AI Engineer Intern at ITR VN, Nov 2024 to Jan 2025: PPG2BP-Net for cuffless blood pressure, SBP MAE 9.76 and DBP MAE 5.25 mmHg; NumPy vectorisation cut latency about 40 percent; STM32 and MAX30102 prototype." />
+<img width="100%" src="./assets/panel-exp-03.svg" alt="Product Reviewer and QA Collaborator at SNOW Vietnam, Apr to Oct 2025: reviewed AI AR filters and computer-vision effects and documented defect patterns." />
+<img width="100%" src="./assets/panel-awards.svg" alt="Awards and education: VPBank Technology Hackathon 2025 Senior Track; Biomedical Engineering Innovation Competition 2025 Team Lead; B.Eng. Electronics and Telecommunication, VNU-HCM, GPA 3.4 of 4.0." />
 
 <img width="100%" src="./assets/sec-02-systems.svg" alt="_02 SYSTEMS" />
 
@@ -35,7 +43,7 @@
 <table width="100%">
 <tr><td><a href="https://github.com/BuccKyy/Deep-PPG-Research-Core"><img src="./assets/panel-ms-01.svg" width="100%" alt="Deep-PPG-Research-Core" /></a></td><td><a href="https://github.com/BuccKyy/Cuffless-BP-IoT-System"><img src="./assets/panel-ms-02.svg" width="100%" alt="Cuffless-BP-IoT-System" /></a></td></tr>
 <tr><td><a href="https://github.com/BuccKyy/Video-Translation-Tool"><img src="./assets/panel-ms-03.svg" width="100%" alt="Video-Translation-Tool" /></a></td><td><a href="https://github.com/BuccKyy/prompt-master-for-codex"><img src="./assets/panel-ms-04.svg" width="100%" alt="prompt-master-for-codex" /></a></td></tr>
-<tr><td><a href="https://github.com/BuccKyy/Medical_Clinic_Booking-System_Ultrasound_Clinic"><img src="./assets/panel-ms-05.svg" width="100%" alt="Medical Clinic Booking" /></a></td><td><a href="https://github.com/BuccKyy/IoT-System-Data-Pipeline_Cuffless-Blood-Pressure-"><img src="./assets/panel-ms-06.svg" width="100%" alt="IoT Data Pipeline" /></a></td></tr>
+<tr><td><a href="https://github.com/BuccKyy/PPG2BP-Deep-Learning"><img src="./assets/panel-ms-05.svg" width="100%" alt="PPG2BP-Deep-Learning" /></a></td><td><a href="https://github.com/BuccKyy/IoT-System-Data-Pipeline_Cuffless-Blood-Pressure-"><img src="./assets/panel-ms-06.svg" width="100%" alt="IoT Data Pipeline" /></a></td></tr>
 </table>
 
 <img width="100%" src="./assets/sec-04-telemetry.svg" alt="_04 TELEMETRY" />

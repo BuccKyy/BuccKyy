@@ -119,8 +119,8 @@ SVG = f"""<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="440" view
 <filter id="blur2"><feGaussianBlur stdDeviation="3"/></filter>
 <pattern id="sl" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="1" fill="#fff" fill-opacity=".05"/></pattern>
 <clipPath id="frame"><rect width="1000" height="440"/></clipPath>
-<clipPath id="c1"><rect id="wipe1" x="44" y="318" width="0" height="64"/></clipPath>
-<clipPath id="c2"><rect id="wipe2" x="44" y="388" width="0" height="20"/></clipPath>
+<clipPath id="c1"><rect id="wipe1" x="44" y="318" width="560" height="64"/></clipPath>
+<clipPath id="c2"><rect id="wipe2" x="44" y="388" width="560" height="20"/></clipPath>
 </defs>
 <g clip-path="url(#frame)">
 <g id="scene">
@@ -138,7 +138,7 @@ SVG = f"""<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="440" view
 <text class="ti" x="44" y="372" font-size="62" fill="url(#ttl)" clip-path="url(#c1)">BUCCKYY</text>
 <text class="ti" x="46" y="403" font-size="15" fill="#7FE7FF" clip-path="url(#c2)">AGENTIC AI ENGINEER // MAXFLOW-AI // HO CHI MINH</text>
 <circle class="pulse" cx="962" cy="52" r="4" fill="#FF5C9A"/>
-<text class="ti" x="946" y="56" font-size="12" fill="#FFE9A8" text-anchor="end">REC // KV4</text>
+<text class="ti" x="946" y="56" font-size="12" fill="#FFE9A8" text-anchor="end">OPEN TO REMOTE ROLES</text>
 </g>
 </svg>
 """

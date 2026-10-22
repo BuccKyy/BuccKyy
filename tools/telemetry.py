@@ -82,6 +82,8 @@ def measure(string: str, size: float, tracking: float, face: Face) -> float:
 def text(string: str, x: float, y: float, size: float, *, face: Face = BAR_REG,
          fill: str = MIST, tracking: float = 0.0, opacity: float = 1.0,
          anchor: str = "start") -> str:
+    if face is MONO:
+        size *= 1.3  # mono labels were too small once the SVG is scaled to column width
     if anchor == "middle":
         x -= measure(string, size, tracking, face) / 2
     elif anchor == "end":
@@ -126,7 +128,16 @@ def fetch() -> dict:
         payload = json.loads(response.read())
     if "errors" in payload:
         sys.exit(f"GraphQL error: {payload['errors']}")
-    return payload["data"]["user"]
+    user = payload["data"]["user"]
+    # "Make profile private" makes the API report zero contributions, so keep
+    # the last real calendar and reuse it instead of drawing an empty heatmap.
+    cache = pathlib.Path(__file__).parent / "calendar_cache.json"
+    cal = user["contributionsCollection"]["contributionCalendar"]
+    if cal["totalContributions"] > 0:
+        cache.write_text(json.dumps(cal))
+    elif cache.exists():
+        user["contributionsCollection"]["contributionCalendar"] = json.loads(cache.read_text())
+    return user
 
 
 def streaks(days: list[dict]) -> tuple[int, int]:
@@ -194,7 +205,7 @@ def render(user: dict) -> str:
     spark = weeks[-26:]
     peak = max((sum(d["contributionCount"] for d in w["contributionDays"]) for w in spark), default=1) or 1
 
-    s = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-label="BuccKyy telemetry: {total} contributions, {stars} stars, {repos["totalCount"]} public repositories, {followers} followers.">']
+    s = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-label="BuccKyy stats: {total} public contributions, {repos["totalCount"]} public repositories, 2 awards, 5 client verticals at MaxflowAI.">']
     s.append("<defs>")
     s.append(
         f'<linearGradient id="bar" x1="0" y1="0" x2="1" y2="0">'
@@ -227,9 +238,9 @@ def render(user: dict) -> str:
     # headline metrics
     metrics = [
         (f"{total:02d}", "PUBLIC CONTRIBUTIONS", "LAST 12 MONTHS"),
-        (f"{stars:02d}", "STARS EARNED", f"ACROSS {repos['totalCount']} REPOS"),
-        (f"{repos['totalCount']:02d}", "PUBLIC REPOS", "DEPLOYED"),
-        (f"{followers:02d}", "FOLLOWERS", "LINKED"),
+        (f"{repos['totalCount']:02d}", "PUBLIC REPOS", "SHIPPED"),
+        ("02", "AWARDS", "HACKATHON + BME 2025"),
+        ("05", "CLIENT VERTICALS", "AT MAXFLOWAI"),
     ]
     xs = [30, 272, 514, 756]
     for i, (value, label, sub) in enumerate(metrics):
@@ -256,39 +267,18 @@ def render(user: dict) -> str:
         s.append(text(f"{pct:02d}%", bar_x + bar_max + 12, y + 6.4, 7.2, face=MONO, fill=PERI, tracking=0.8))
         y += 14
 
-    # activity heatmap (53 weeks x 7 days), GitHub-calendar style
+    # recognition (replaces the small heatmap; the full-width one lives in heatmap.svg)
     s.append(f'<rect x="520" y="186" width="1" height="94" fill="{STEEL}" opacity="0.35"/>')
-    s.append(text("ACTIVITY // LAST 12 MONTHS", 548, 196, 7.8, face=MONO, fill=PERI, tracking=1.6))
-    s.append(text("DAILY CONTRIBUTIONS", 548, 207, 6.2, face=MONO, fill=DIM, tracking=1.0))
-    cell, gap = 5.0, 1.45
-    grid = weeks[-53:]
-    x0, y0 = 548, 218
-    buckets = [
-        (0, "#1E0B33"),
-        (2, "#4A1A66"),
-        (5, "#B8337A"),
-        (9, CYAN),
-        (10**9, CYAN_HOT),
-    ]
-    for wi, week in enumerate(grid):
-        for di, day in enumerate(week["contributionDays"]):
-            value = day["contributionCount"]
-            fill = next(color for limit, color in buckets if value <= limit)
-            opacity = 1.0 if value else 0.85
-            s.append(
-                f'<rect x="{x0 + wi * (cell + gap):.2f}" y="{y0 + di * (cell + gap):.2f}" '
-                f'width="{cell}" height="{cell}" fill="{fill}" opacity="{opacity}"/>'
-            )
-    # legend
-    lx = 900
-    s.append(text("LESS", lx, 196, 5.4, face=MONO, fill=DIM, tracking=0.8))
-    for i, (_, color) in enumerate(buckets):
-        s.append(f'<rect x="{lx + 26 + i * 8.4}" y="{191.6}" width="5" height="5" fill="{color}"/>')
-    s.append(text("MORE", lx + 26 + 5 * 8.4 + 4, 196, 5.4, face=MONO, fill=DIM, tracking=0.8))
-    s.append(text(f"STREAK {current_streak:02d}D", 548, 280, 7.2, face=MONO, fill=PERI, tracking=1.2))
-    s.append(text(f"BEST {best_streak:02d}D", 640, 280, 7.2, face=MONO, fill=DIM, tracking=1.2))
-    s.append(text(f"PEAK {peak:02d}/WK", 732, 280, 7.2, face=MONO, fill=DIM, tracking=1.2))
-    s.append(text("SIGNAL // VERIFIED", 970, 280, 6.2, face=MONO, fill=STEEL, tracking=1.1, anchor="end"))
+    s.append(text("RECOGNITION", 548, 196, 7.8, face=MONO, fill=PERI, tracking=1.6))
+    rows_r = [("VPBANK TECHNOLOGY HACKATHON 2025", "SENIOR TRACK"),
+              ("BIOMEDICAL ENGINEERING INNOVATION 2025", "TEAM LEAD // IOT BP MONITORING"),
+              ("B.ENG ELECTRONICS & TELECOM // VNU-HCM", "GPA 3.4 / 4.0")]
+    ry = 216
+    for head, sub in rows_r:
+        s.append(text(head, 548, ry, 12, face=BAR_REG, fill=MIST, tracking=1.2))
+        s.append(text(sub, 548, ry + 12, 6.2, face=MONO, fill=DIM, tracking=1.0))
+        ry += 27
+    s.append(text(f"STREAK {current_streak:02d}D", 30, 289, 5.4, face=MONO, fill=STEEL, tracking=1.2))
 
     # footer micro
     s.append(f'<rect x="30" y="288" width="1" height="0" fill="none"/>')
