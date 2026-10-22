@@ -228,11 +228,26 @@ def comms():
         (A / f"panel-link-{k.lower()}.svg").write_text(wrap(w, h, body, common_defs(w, h, 8, TINT[pal], acc), label=f"{k} {v}"))
 
 
+def ctas():
+    specs = [("cta-portfolio.svg", 560, 96, "SEC.00 // LAUNCH", "ENTER PORTFOLIO", "sunset", ("kv4", .0, .05, .9), 44),
+             ("cta-repos.svg", 272, 96, "ARCHIVE", "REPOSITORIES", "neon", ("kv2", .1, .1, .8), 30),
+             ("cta-contact.svg", 272, 96, "OPEN CHANNEL", "CONTACT", "fire", ("kv4", .2, .5, .7), 30)]
+    for name, w, h, tag, title, pal, (k, x, y, wf), fs in specs:
+        acc = ACC[pal]
+        body = (frame(w, h, 8, pal, photo(k, x, y, wf, w, h, q=76), len(name)) +
+                f'<text x="22" y="34" font-size="14" letter-spacing="5" fill="{acc}" stroke="#12061F" stroke-width=".8" paint-order="stroke">{tag}</text>'
+                f'<text x="22" y="{h - 22}" font-size="{fs}" letter-spacing="{6 if w > 400 else 3}" fill="#fff" stroke="#12061F" stroke-width="1.2" paint-order="stroke">{title}</text>'
+                f'<path d="M{w - 46} {h // 2 - 12}l20 12-20 12" fill="none" stroke="{acc}" stroke-width="3"/>'
+                f'<circle class="bl" cx="{w - 16}" cy="16" r="4" fill="{acc}"/>' + brackets(w, h, acc, .95, 6, 12))
+        (A / name).write_text(wrap(w, h, body, common_defs(w, h, 8, TINT[pal], acc), label=title))
+
+
 if __name__ == "__main__":
     banners()
     pilot()
     systems()
     missions()
     comms()
+    ctas()
     sizes = {p.name: p.stat().st_size // 1024 for p in sorted(A.glob("*.svg"))}
     print(sizes)

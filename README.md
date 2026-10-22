@@ -10,13 +10,12 @@
 </p>
 
 <p align="center">
-  <a href="https://bucckyy.github.io"><img src="./assets/cta-portfolio.svg" width="420" alt="Enter portfolio" /></a>
+  <a href="https://bucckyy.github.io"><img src="./assets/cta-portfolio.svg" width="560" alt="Enter portfolio" /></a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/BuccKyy?tab=repositories"><img src="./assets/cta-repos.svg" width="112" alt="Repositories" /></a>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="mailto:trantrungduc313@gmail.com"><img src="./assets/cta-contact.svg" width="112" alt="Contact" /></a>
+  <a href="https://github.com/BuccKyy?tab=repositories"><img src="./assets/cta-repos.svg" width="272" alt="Repositories" /></a>
+  <a href="mailto:trantrungduc313@gmail.com"><img src="./assets/cta-contact.svg" width="272" alt="Contact" /></a>
 </p>
 
 <img width="100%" src="./assets/sec-01-pilot.svg" alt="_01 PILOT" />

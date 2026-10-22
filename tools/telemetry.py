@@ -9,6 +9,8 @@ time. Only ASCII is used, which keeps the committed subset fonts tiny.
 """
 from __future__ import annotations
 
+import base64
+import pathlib
 import json
 import os
 import sys
@@ -209,6 +211,9 @@ def render(user: dict) -> str:
     )
     s.append("</defs>")
     s.append(f'<rect width="{W}" height="{H}" fill="url(#bg)"/>')
+    bg = base64.b64encode((pathlib.Path(__file__).parent / "telemetry_bg.jpg").read_bytes()).decode()
+    s.append(f'<image href="data:image/jpeg;base64,{bg}" width="{W}" height="{H}" preserveAspectRatio="xMidYMid slice" opacity="0.55"/>')
+    s.append(f'<rect width="{W}" height="{H}" fill="#12061F" opacity="0.58"/>')
     s.append(f'<rect width="{W}" height="{H}" fill="url(#scan)"/>')
     s.append(f'<rect x="0.5" y="0.5" width="{W - 1}" height="{H - 1}" fill="none" stroke="{STEEL}" stroke-opacity="0.5"/>')
 
