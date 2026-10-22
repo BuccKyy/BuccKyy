@@ -11,13 +11,11 @@
 
 <a href="https://bucckyy.github.io"><img src="./assets/cta-portfolio.svg" width="100%" alt="Enter portfolio" /></a>
 
-<table width="100%">
-<tr>
-<td width="33%"><a href="https://github.com/BuccKyy?tab=repositories"><img src="./assets/cta-repos.svg" width="100%" alt="Repositories" /></a></td>
-<td width="33%"><a href="https://bucckyy.github.io/TranTrungDuc-AI-Engineer-CV.pdf"><img src="./assets/cta-cv.svg" width="100%" alt="Download CV (PDF)" /></a></td>
-<td width="33%"><a href="mailto:trantrungduc313@gmail.com"><img src="./assets/cta-contact.svg" width="100%" alt="Contact" /></a></td>
-</tr>
-</table>
+<p align="center">
+<a href="https://github.com/BuccKyy?tab=repositories"><img src="./assets/cta-repos.svg" width="32.8%" alt="Repositories" /></a>
+<a href="https://bucckyy.github.io/TranTrungDuc-AI-Engineer-CV.pdf"><img src="./assets/cta-cv.svg" width="32.8%" alt="Download CV (PDF)" /></a>
+<a href="mailto:trantrungduc313@gmail.com"><img src="./assets/cta-contact.svg" width="32.8%" alt="Contact" /></a>
+</p>
 
 <img width="100%" src="./assets/sec-01-pilot.svg" alt="_01 PILOT" />
 
@@ -40,20 +38,14 @@
 
 <img width="100%" src="./assets/sec-03-missions.svg" alt="_04 MISSIONS" />
 
-<table width="100%">
-<tr>
-<td width="50%"><a href="https://github.com/BuccKyy/Deep-PPG-Research-Core"><img src="./assets/panel-ms-01.svg" width="100%" alt="Deep-PPG-Research-Core" /></a></td>
-<td width="50%"><a href="https://github.com/BuccKyy/Cuffless-BP-IoT-System"><img src="./assets/panel-ms-02.svg" width="100%" alt="Cuffless-BP-IoT-System" /></a></td>
-</tr>
-<tr>
-<td width="50%"><a href="https://github.com/BuccKyy/Video-Translation-Tool"><img src="./assets/panel-ms-03.svg" width="100%" alt="Video-Translation-Tool" /></a></td>
-<td width="50%"><a href="https://github.com/BuccKyy/prompt-master-for-codex"><img src="./assets/panel-ms-04.svg" width="100%" alt="prompt-master-for-codex" /></a></td>
-</tr>
-<tr>
-<td width="50%"><a href="https://github.com/BuccKyy/PPG2BP-Deep-Learning"><img src="./assets/panel-ms-05.svg" width="100%" alt="PPG2BP-Deep-Learning" /></a></td>
-<td width="50%"><a href="https://github.com/BuccKyy/IoT-System-Data-Pipeline_Cuffless-Blood-Pressure-"><img src="./assets/panel-ms-06.svg" width="100%" alt="IoT Data Pipeline" /></a></td>
-</tr>
-</table>
+<p align="center">
+<a href="https://github.com/BuccKyy/Deep-PPG-Research-Core"><img src="./assets/panel-ms-01.svg" width="49.4%" alt="Deep-PPG-Research-Core" /></a>
+<a href="https://github.com/BuccKyy/Cuffless-BP-IoT-System"><img src="./assets/panel-ms-02.svg" width="49.4%" alt="Cuffless-BP-IoT-System" /></a>
+<a href="https://github.com/BuccKyy/Video-Translation-Tool"><img src="./assets/panel-ms-03.svg" width="49.4%" alt="Video-Translation-Tool" /></a>
+<a href="https://github.com/BuccKyy/prompt-master-for-codex"><img src="./assets/panel-ms-04.svg" width="49.4%" alt="prompt-master-for-codex" /></a>
+<a href="https://github.com/BuccKyy/PPG2BP-Deep-Learning"><img src="./assets/panel-ms-05.svg" width="49.4%" alt="PPG2BP-Deep-Learning" /></a>
+<a href="https://github.com/BuccKyy/IoT-System-Data-Pipeline_Cuffless-Blood-Pressure-"><img src="./assets/panel-ms-06.svg" width="49.4%" alt="IoT Data Pipeline" /></a>
+</p>
 
 <img width="100%" src="./assets/sec-04-telemetry.svg" alt="_05 STATS" />
 
@@ -62,16 +54,12 @@
 
 <img width="100%" src="./assets/sec-05-comms.svg" alt="_06 CONTACT" />
 
-<table width="100%">
-<tr>
-<td width="50%"><a href="https://github.com/BuccKyy"><img src="./assets/panel-link-github.svg" width="100%" alt="GitHub: BuccKyy" /></a></td>
-<td width="50%"><a href="https://www.linkedin.com/in/tranductrung-ai/"><img src="./assets/panel-link-linkedin.svg" width="100%" alt="LinkedIn: tranductrung-ai" /></a></td>
-</tr>
-<tr>
-<td width="50%"><a href="https://bucckyy.github.io"><img src="./assets/panel-link-website.svg" width="100%" alt="Website: bucckyy.github.io" /></a></td>
-<td width="50%"><a href="mailto:trantrungduc313@gmail.com"><img src="./assets/panel-link-email.svg" width="100%" alt="Email: trantrungduc313@gmail.com" /></a></td>
-</tr>
-</table>
+<p align="center">
+<a href="https://github.com/BuccKyy"><img src="./assets/panel-link-github.svg" width="49.4%" alt="GitHub: BuccKyy" /></a>
+<a href="https://www.linkedin.com/in/tranductrung-ai/"><img src="./assets/panel-link-linkedin.svg" width="49.4%" alt="LinkedIn: tranductrung-ai" /></a>
+<a href="https://bucckyy.github.io"><img src="./assets/panel-link-website.svg" width="49.4%" alt="Website: bucckyy.github.io" /></a>
+<a href="mailto:trantrungduc313@gmail.com"><img src="./assets/panel-link-email.svg" width="49.4%" alt="Email: trantrungduc313@gmail.com" /></a>
+</p>
 
 <details>
 <summary>Plain-text summary</summary>
