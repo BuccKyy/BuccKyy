@@ -261,7 +261,7 @@ MISSIONS = [
     ("02", "payment-approval-agent-n8n", "AI-assisted internal payment approvals", "N8N · OPENAI", "neon", ("kv2", .0, .05, .9)),
     ("03", "ai-news-agent-n8n", "27 sources, LLM scoring, Telegram alerts", "N8N · GROQ", "dawn", ("kv4", .25, .30, .7)),
     ("04", "prompt-master-for-codex", "Turns rough requests into scoped tasks", "PYTHON · CODEX", "fire", ("kv4", .3, .14, .7)),
-    ("05", "Deep-PPG-Research-Core", "Research framework for PPG blood pressure", "PYTHON · PYTORCH", "ocean", ("kv2", .1, .30, .8)),
+    ("05", "Deep-PPG-Research-Core", "Research framework for PPG blood pressure", "PYTHON · TENSORFLOW", "ocean", ("kv2", .1, .30, .8)),
     ("06", "Cuffless-BP-IoT-System", "Real-time cuffless BP on STM32 + Android", "C · EDGE AI", "aurora", ("kv3", .0, .20, 1.0)),
 ]
 
