@@ -10,10 +10,10 @@ import pathlib
 import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
-from panels_gen import photo  # noqa: E402
+from panels_gen import FONT as _SUBSET_FONT, photo  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-FONT = base64.b64encode((ROOT / "tools/fonts/BarlowCondensed-Medium.ttf").read_bytes()).decode()
+FONT = _SUBSET_FONT
 
 CX = 640  # mech centre line
 
@@ -63,7 +63,7 @@ def comets():
     return "\n".join(out)
 
 
-HERO = photo("kv4", .0, .07, 1.0, 1000, 440, q=78, scale=1.4)
+HERO = photo("kv4", .0, .07, 1.0, 1000, 440, q=62, scale=1.0)
 
 SVG = f"""<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="440" viewBox="0 0 1000 440" role="img" aria-labelledby="t d">
 <title id="t">BuccKyy — AI Engineer</title>
