@@ -191,99 +191,41 @@ def frame(w: int, h: int) -> str:
 
 
 def render(user: dict) -> str:
-    W, H = 1000, 300
+    """Compact stats panel: big numbers, labels that stay readable on a phone."""
+    W, H = 1000, 330
     repos = user["repositories"]
-    nodes = repos["nodes"]
-    stars = sum(node["stargazerCount"] for node in nodes)
-    followers = user["followers"]["totalCount"]
-    total = user["contributionsCollection"]["contributionCalendar"]["totalContributions"]
-    weeks = user["contributionsCollection"]["contributionCalendar"]["weeks"]
-    days = [day for week in weeks for day in week["contributionDays"]]
-    current_streak, best_streak = streaks(days)
-    rows = languages(nodes)
-    now = datetime.now(timezone.utc).strftime("%Y.%m.%d // %H:%M UTC")
-    spark = weeks[-26:]
-    peak = max((sum(d["contributionCount"] for d in w["contributionDays"]) for w in spark), default=1) or 1
-
-    s = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-label="BuccKyy stats: {total} public contributions, {repos["totalCount"]} public repositories, 2 awards, 5 client verticals at MaxflowAI.">']
-    s.append("<defs>")
-    s.append(
-        f'<linearGradient id="bar" x1="0" y1="0" x2="1" y2="0">'
-        f'<stop offset="0" stop-color="{PERI}"/><stop offset="1" stop-color="{CYAN}"/></linearGradient>'
-    )
-    s.append(
-        f'<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">'
-        f'<stop offset="0" stop-color="#12061F"/><stop offset="0.6" stop-color="{VOID}"/>'
-        f'<stop offset="1" stop-color="#12061F"/></linearGradient>'
-    )
-    s.append(
-        f'<pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse">'
-        f'<rect width="4" height="1" fill="{MIST}" opacity="0.035"/></pattern>'
-    )
-    s.append("</defs>")
-    s.append(f'<rect width="{W}" height="{H}" fill="url(#bg)"/>')
+    cal = user["contributionsCollection"]["contributionCalendar"]
+    now = datetime.now(timezone.utc).strftime("%Y.%m.%d")
     bg = base64.b64encode((pathlib.Path(__file__).parent / "telemetry_bg.jpg").read_bytes()).decode()
-    s.append(f'<image href="data:image/jpeg;base64,{bg}" width="{W}" height="{H}" preserveAspectRatio="xMidYMid slice" opacity="0.55"/>')
-    s.append(f'<rect width="{W}" height="{H}" fill="#12061F" opacity="0.58"/>')
-    s.append(f'<rect width="{W}" height="{H}" fill="url(#scan)"/>')
-    s.append(f'<rect x="0.5" y="0.5" width="{W - 1}" height="{H - 1}" fill="none" stroke="{STEEL}" stroke-opacity="0.5"/>')
-
-    # header
-    s.append(text("_COMBAT RECORD", 30, 42, 26, face=BAR_REG, fill=MIST, tracking=2.4))
-    s.append(text(f"SYNCED // {now}", W - 30, 34, 7.4, face=MONO, fill=DIM, tracking=1.2, anchor="end"))
-    s.append(text("SOURCE // GITHUB GRAPHQL API", W - 30, 47, 6.6, face=MONO, fill=DIM, tracking=1.2, anchor="end"))
-    s.append(f'<rect x="30" y="56" width="{W - 60}" height="1" fill="{STEEL}" opacity="0.55"/>')
-    s.append(f'<rect x="30" y="56" width="120" height="1" fill="{PERI}" opacity="0.8"/>')
-
-    # headline metrics
+    s = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" '
+         f'aria-label="Stats: {cal["totalContributions"]} public contributions in the last 12 months, {repos["totalCount"]} original public repositories, 2 awards, 5 client verticals at MaxflowAI.">',
+         f'<defs><clipPath id="f"><rect width="{W}" height="{H}" rx="6"/></clipPath></defs>',
+         f'<g clip-path="url(#f)"><rect width="{W}" height="{H}" fill="#12061F"/>',
+         f'<image href="data:image/jpeg;base64,{bg}" width="{W}" height="{H}" preserveAspectRatio="xMidYMid slice" opacity="0.55"/>',
+         f'<rect width="{W}" height="{H}" fill="#12061F" opacity="0.62"/></g>']
+    s.append(text("_STATS", 30, 62, 46, face=BAR_REG, fill=MIST, tracking=3))
+    s.append(text(f"SYNCED {now}", W - 30, 54, 12.5, face=MONO, fill=PERI, tracking=1.4, anchor="end"))
+    s.append(f'<rect x="30" y="80" width="{W - 60}" height="1" fill="{STEEL}" opacity="0.6"/>')
+    s.append(f'<rect x="30" y="80" width="160" height="2" fill="{PERI}"/>')
     metrics = [
-        (f"{total:02d}", "PUBLIC CONTRIBUTIONS", "LAST 12 MONTHS"),
-        (f"{repos['totalCount']:02d}", "PUBLIC REPOS", "SHIPPED"),
-        ("02", "AWARDS", "HACKATHON + BME 2025"),
+        (f"{cal['totalContributions']:02d}", "CONTRIBUTIONS", "LAST 12 MONTHS"),
+        (f"{repos['totalCount']:02d}", "ORIGINAL REPOS", "EXCL. FORKS"),
+        ("02", "AWARDS", "HACKATHON + BME"),
         ("05", "CLIENT VERTICALS", "AT MAXFLOWAI"),
     ]
-    xs = [30, 272, 514, 756]
+    xs = [30, 275, 520, 765]
     for i, (value, label, sub) in enumerate(metrics):
         x = xs[i]
-        s.append(text(value, x, 126, 52, face=BAR_LIGHT, fill=MIST, tracking=1.5))
-        s.append(text(label, x + 2, 144, 7.8, face=MONO, fill=PERI, tracking=1.6))
-        s.append(text(sub, x + 2, 156, 6.6, face=MONO, fill=DIM, tracking=1.2))
+        s.append(text(value, x, 168, 84, face=BAR_LIGHT, fill=MIST, tracking=1.5))
+        s.append(text(label, x + 2, 202, 16, face=MONO, fill=PERI, tracking=1.0))
+        s.append(text(sub, x + 2, 230, 13, face=MONO, fill=MIST, tracking=0.6, opacity=0.8))
         if i:
-            s.append(f'<rect x="{x - 22}" y="88" width="1" height="66" fill="{STEEL}" opacity="0.45"/>')
-
-    s.append(f'<rect x="30" y="176" width="{W - 60}" height="1" fill="{STEEL}" opacity="0.32"/>')
-
-    # loadout bars
-    s.append(text("LOADOUT DISTRIBUTION", 30, 196, 7.8, face=MONO, fill=PERI, tracking=1.6))
-    s.append(text("BY PRIMARY LANGUAGE / PUBLIC REPOS", 30, 207, 6.2, face=MONO, fill=DIM, tracking=1.0))
-    bar_x, bar_max = 132, 296
-    y = 220
-    for name, pct in rows:
-        s.append(text(name, 30, y + 6.4, 7.6, face=MONO, fill=MIST, tracking=1.0, opacity=0.9))
-        s.append(f'<rect x="{bar_x}" y="{y}" width="{bar_max}" height="7" fill="{STEEL}" opacity="0.28"/>')
-        s.append(
-            f'<rect x="{bar_x}" y="{y}" width="{bar_max * pct / 100:.1f}" height="7" fill="url(#bar)" opacity="0.92"/>'
-        )
-        s.append(text(f"{pct:02d}%", bar_x + bar_max + 12, y + 6.4, 7.2, face=MONO, fill=PERI, tracking=0.8))
-        y += 14
-
-    # recognition (replaces the small heatmap; the full-width one lives in heatmap.svg)
-    s.append(f'<rect x="520" y="186" width="1" height="94" fill="{STEEL}" opacity="0.35"/>')
-    s.append(text("RECOGNITION", 548, 196, 7.8, face=MONO, fill=PERI, tracking=1.6))
-    rows_r = [("VPBANK TECHNOLOGY HACKATHON 2025", "SENIOR TRACK"),
-              ("BIOMEDICAL ENGINEERING INNOVATION 2025", "TEAM LEAD // IOT BP MONITORING"),
-              ("B.ENG ELECTRONICS & TELECOM // VNU-HCM", "GPA 3.4 / 4.0")]
-    ry = 216
-    for head, sub in rows_r:
-        s.append(text(head, 548, ry, 12, face=BAR_REG, fill=MIST, tracking=1.2))
-        s.append(text(sub, 548, ry + 12, 6.2, face=MONO, fill=DIM, tracking=1.0))
-        ry += 27
-    s.append(text(f"STREAK {current_streak:02d}D", 30, 289, 5.4, face=MONO, fill=STEEL, tracking=1.2))
-
-    # footer micro
-    s.append(f'<rect x="30" y="288" width="1" height="0" fill="none"/>')
-    s.append(text("MS-01 / TELEMETRY", 30, 289, 5.8, face=MONO, fill=STEEL, tracking=1.4))
-    s.append(text("SELF-HOSTED SVG / NO THIRD-PARTY CARD", 970, 289, 5.8, face=MONO, fill=STEEL, tracking=1.2, anchor="end"))
+            s.append(f'<rect x="{x - 18}" y="104" width="1" height="130" fill="{STEEL}" opacity="0.55"/>')
+    s.append(f'<rect x="30" y="248" width="{W - 60}" height="1" fill="{STEEL}" opacity="0.45"/>')
+    s.append(text("NOW", 30, 282, 16, face=MONO, fill=PERI, tracking=1.4))
+    s.append(text("Building multi-agent workflows at MaxflowAI", 130, 282, 26, face=BAR_REG, fill=MIST, tracking=1.2))
+    s.append(text("TOOLS", 30, 312, 16, face=MONO, fill=PERI, tracking=1.4))
+    s.append(text("Claude Code · Python · Playwright · TensorFlow / PyTorch", 130, 312, 26, face=BAR_REG, fill=MIST, tracking=1.2))
     s.append(frame(W, H))
     s.append("</svg>")
     return "\n".join(s)
@@ -312,7 +254,7 @@ def render_heatmap(user: dict) -> str:
     bg = base64.b64encode((pathlib.Path(__file__).parent / "telemetry_bg.jpg").read_bytes()).decode()
     s = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" '
          f'aria-label="Contribution heatmap: {cal["totalContributions"]} public contributions in the last year.">',
-         "<style>@keyframes pop{from{opacity:0;transform:scale(.2)}to{opacity:1;transform:scale(1)}}"
+         "<style>@keyframes pop{from{transform:scale(.35)}to{transform:scale(1)}}"
          "@keyframes ring{0%,100%{opacity:.25}50%{opacity:1}}"
          "@keyframes sweep{from{transform:translateX(-120px)}to{transform:translateX(1100px)}}"
          ".c{transform-box:fill-box;transform-origin:center;animation:pop .5s ease-out both}"
@@ -324,15 +266,15 @@ def render_heatmap(user: dict) -> str:
          f'<image href="data:image/jpeg;base64,{bg}" width="{W}" height="{H}" preserveAspectRatio="xMidYMid slice" opacity="0.5"/>',
          f'<rect width="{W}" height="{H}" fill="#12061F" opacity="0.6"/>',
          f'<rect class="sw" y="0" width="120" height="{H}" fill="url(#sg)"/></g>']
-    s.append(text("_YEAR IN FLIGHT", 30, 44, 28, face=BAR_REG, fill=MIST, tracking=2.6))
-    s.append(text(f"{cal['totalContributions']} PUBLIC CONTRIBUTIONS // LAST 12 MONTHS", W - 30, 40, 8, face=MONO, fill=PERI, tracking=1.4, anchor="end"))
+    s.append(text("_YEAR IN FLIGHT", 30, 46, 40, face=BAR_REG, fill=MIST, tracking=2.6))
+    s.append(text(f"{cal['totalContributions']} PUBLIC CONTRIBUTIONS", W - 30, 40, 12.5, face=MONO, fill=PERI, tracking=1.4, anchor="end"))
     last_month = None
     for wi, week in enumerate(weeks):
         first = week["contributionDays"][0]["date"]
         month = first[5:7]
         if month != last_month and wi < len(weeks) - 2:
             names = ["", "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
-            s.append(text(names[int(month)], x0 + wi * pitch, 62, 7, face=MONO, fill=DIM, tracking=1.2))
+            s.append(text(names[int(month)], x0 + wi * pitch, 63, 9.5, face=MONO, fill=DIM, tracking=1.2))
             last_month = month
         for di, day in enumerate(week["contributionDays"]):
             n = day["contributionCount"]
@@ -342,12 +284,12 @@ def render_heatmap(user: dict) -> str:
             if peak_day and day["date"] == peak_day["date"] and n:
                 s.append(f'<rect class="r" x="{x - 2:.1f}" y="{y - 2:.1f}" width="{cell + 4}" height="{cell + 4}" rx="5" fill="none" stroke="#FFD56A" stroke-width="1.6"/>')
     for di, label in ((1, "MON"), (3, "WED"), (5, "FRI")):
-        s.append(text(label, 30, y0 + di * pitch + 11, 6.4, face=MONO, fill=DIM, tracking=1.0))
-    s.append(text("LESS", W - 214, 222, 6.4, face=MONO, fill=DIM, tracking=1.0))
+        s.append(text(label, 22, y0 + di * pitch + 12, 8.5, face=MONO, fill=DIM, tracking=1.0))
+    s.append(text("LESS", W - 232, 224, 9.5, face=MONO, fill=DIM, tracking=1.0))
     for i, color in enumerate(HEAT_COLORS):
         s.append(f'<rect x="{W - 180 + i * 20}" y="213" width="14" height="14" rx="3" fill="{color}"/>')
-    s.append(text("MORE", W - 72, 222, 6.4, face=MONO, fill=DIM, tracking=1.0))
-    s.append(text("RING = PEAK DAY // REGENERATED DAILY BY GITHUB ACTIONS", 54, 222, 6.4, face=MONO, fill=STEEL, tracking=1.2))
+    s.append(text("MORE", W - 78, 224, 9.5, face=MONO, fill=DIM, tracking=1.0))
+    s.append(text("RING = PEAK DAY", 54, 224, 9.5, face=MONO, fill=DIM, tracking=1.2))
     s.append(frame(W, H))
     s.append("</svg>")
     return "\n".join(s)

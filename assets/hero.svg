@@ -73,9 +73,9 @@
 <rect class="scan" y="0" width="1000" height="120" fill="#fff" fill-opacity=".035"/>
 <rect width="1000" height="440" fill="url(#sl)"/>
 <path d="M18 40V30H32M968 30H982V40M982 400V410H968M32 410H18V400" fill="none" stroke="#7FE7FF" stroke-width="2" opacity=".9"/>
-<text class="ti" x="44" y="372" font-size="62" fill="url(#ttl)" clip-path="url(#c1)">BUCCKYY</text>
-<text class="ti" x="46" y="403" font-size="15" fill="#7FE7FF" clip-path="url(#c2)">AGENTIC AI ENGINEER // MAXFLOW-AI // HO CHI MINH</text>
-<circle class="pulse" cx="962" cy="52" r="4" fill="#FF5C9A"/>
-<text class="ti" x="946" y="56" font-size="12" fill="#FFE9A8" text-anchor="end">OPEN TO REMOTE ROLES</text>
+<text class="ti" x="44" y="370" font-size="72" fill="url(#ttl)" stroke="#0B0414" stroke-width="1.2" paint-order="stroke">BUCCKYY</text>
+<text class="ti" x="46" y="408" font-size="26" fill="#7FE7FF" stroke="#0B0414" stroke-width="1" paint-order="stroke">AGENTIC AI ENGINEER  //  HO CHI MINH</text>
+<circle class="pulse" cx="966" cy="52" r="6" fill="#FF5C9A"/>
+<text class="ti" x="946" y="60" font-size="22" fill="#FFE9A8" text-anchor="end" stroke="#0B0414" stroke-width="1" paint-order="stroke">OPEN TO REMOTE ROLES</text>
 </g>
 </svg>
