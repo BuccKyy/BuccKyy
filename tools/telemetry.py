@@ -221,7 +221,7 @@ def render(user: dict) -> str:
 
     # headline metrics
     metrics = [
-        (f"{total:02d}", "CONTRIBUTIONS", "LAST 12 MONTHS"),
+        (f"{total:02d}", "PUBLIC CONTRIBUTIONS", "LAST 12 MONTHS"),
         (f"{stars:02d}", "STARS EARNED", f"ACROSS {repos['totalCount']} REPOS"),
         (f"{repos['totalCount']:02d}", "PUBLIC REPOS", "DEPLOYED"),
         (f"{followers:02d}", "FOLLOWERS", "LINKED"),
