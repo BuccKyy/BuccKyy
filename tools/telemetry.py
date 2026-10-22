@@ -299,12 +299,80 @@ def render(user: dict) -> str:
     return "\n".join(s)
 
 
+HEAT_OUT = os.path.join(ROOT, "assets", "heatmap.svg")
+HEAT_COLORS = ["#2A1247", "#6A2C8F", "#E2447A", "#FF8A3D", "#FFD56A"]
+
+
+def render_heatmap(user: dict) -> str:
+    """Full-width 53-week contribution heatmap in the profile palette."""
+    W, H = 1000, 236
+    cal = user["contributionsCollection"]["contributionCalendar"]
+    weeks = cal["weeks"][-53:]
+    days = [d for w in weeks for d in w["contributionDays"]]
+    peak_day = max(days, key=lambda d: d["contributionCount"], default=None)
+    top = max((d["contributionCount"] for d in days), default=1) or 1
+    cell, pitch, x0, y0 = 15, 17.6, 54, 70
+
+    def level(n: int) -> int:
+        if n == 0:
+            return 0
+        q = n / top
+        return 1 if q <= .25 else 2 if q <= .5 else 3 if q <= .75 else 4
+
+    bg = base64.b64encode((pathlib.Path(__file__).parent / "telemetry_bg.jpg").read_bytes()).decode()
+    s = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" '
+         f'aria-label="Contribution heatmap: {cal["totalContributions"]} public contributions in the last year.">',
+         "<style>@keyframes pop{from{opacity:0;transform:scale(.2)}to{opacity:1;transform:scale(1)}}"
+         "@keyframes ring{0%,100%{opacity:.25}50%{opacity:1}}"
+         "@keyframes sweep{from{transform:translateX(-120px)}to{transform:translateX(1100px)}}"
+         ".c{transform-box:fill-box;transform-origin:center;animation:pop .5s ease-out both}"
+         ".r{animation:ring 1.6s ease-in-out infinite}.sw{animation:sweep 6s linear infinite}"
+         "@media (prefers-reduced-motion:reduce){*{animation:none!important}}</style>",
+         '<defs><clipPath id="f"><rect width="1000" height="236" rx="6"/></clipPath>'
+         '<linearGradient id="sg" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#FFD56A" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>',
+         f'<g clip-path="url(#f)"><rect width="{W}" height="{H}" fill="#12061F"/>',
+         f'<image href="data:image/jpeg;base64,{bg}" width="{W}" height="{H}" preserveAspectRatio="xMidYMid slice" opacity="0.5"/>',
+         f'<rect width="{W}" height="{H}" fill="#12061F" opacity="0.6"/>',
+         f'<rect class="sw" y="0" width="120" height="{H}" fill="url(#sg)"/></g>']
+    s.append(text("_YEAR IN FLIGHT", 30, 44, 28, face=BAR_REG, fill=MIST, tracking=2.6))
+    s.append(text(f"{cal['totalContributions']} PUBLIC CONTRIBUTIONS // LAST 12 MONTHS", W - 30, 40, 8, face=MONO, fill=PERI, tracking=1.4, anchor="end"))
+    last_month = None
+    for wi, week in enumerate(weeks):
+        first = week["contributionDays"][0]["date"]
+        month = first[5:7]
+        if month != last_month and wi < len(weeks) - 2:
+            names = ["", "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
+            s.append(text(names[int(month)], x0 + wi * pitch, 62, 7, face=MONO, fill=DIM, tracking=1.2))
+            last_month = month
+        for di, day in enumerate(week["contributionDays"]):
+            n = day["contributionCount"]
+            x, y = x0 + wi * pitch, y0 + di * pitch
+            op = 1.0 if n else 0.8
+            s.append(f'<rect class="c" x="{x:.1f}" y="{y:.1f}" width="{cell}" height="{cell}" rx="3" fill="{HEAT_COLORS[level(n)]}" opacity="{op}" style="animation-delay:{wi * 0.03:.2f}s"/>')
+            if peak_day and day["date"] == peak_day["date"] and n:
+                s.append(f'<rect class="r" x="{x - 2:.1f}" y="{y - 2:.1f}" width="{cell + 4}" height="{cell + 4}" rx="5" fill="none" stroke="#FFD56A" stroke-width="1.6"/>')
+    for di, label in ((1, "MON"), (3, "WED"), (5, "FRI")):
+        s.append(text(label, 30, y0 + di * pitch + 11, 6.4, face=MONO, fill=DIM, tracking=1.0))
+    s.append(text("LESS", W - 214, 222, 6.4, face=MONO, fill=DIM, tracking=1.0))
+    for i, color in enumerate(HEAT_COLORS):
+        s.append(f'<rect x="{W - 180 + i * 20}" y="213" width="14" height="14" rx="3" fill="{color}"/>')
+    s.append(text("MORE", W - 72, 222, 6.4, face=MONO, fill=DIM, tracking=1.0))
+    s.append(text("RING = PEAK DAY // REGENERATED DAILY BY GITHUB ACTIONS", 54, 222, 6.4, face=MONO, fill=STEEL, tracking=1.2))
+    s.append(frame(W, H))
+    s.append("</svg>")
+    return "\n".join(s)
+
+
 def main() -> None:
     user = fetch()
     svg = render(user)
     with open(OUT, "w", encoding="utf-8") as fh:
         fh.write(svg)
     print(f"wrote {OUT} ({len(svg):,} bytes)")
+    heat = render_heatmap(user)
+    with open(HEAT_OUT, "w", encoding="utf-8") as fh:
+        fh.write(heat)
+    print(f"wrote {HEAT_OUT} ({len(heat):,} bytes)")
 
 
 if __name__ == "__main__":

@@ -42,6 +42,8 @@
 
 <p align="center">
   <img width="100%" src="./assets/telemetry.svg" alt="Combat record — contributions, stars, public repositories, followers, language loadout and a 12-month contribution heatmap." />
+<br />
+  <img width="100%" src="./assets/heatmap.svg" alt="Contribution heatmap: public contributions over the last 12 months" />
 </p>
 
 <p align="center">
