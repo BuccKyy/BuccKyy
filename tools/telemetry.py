@@ -198,7 +198,7 @@ def render(user: dict) -> str:
     now = datetime.now(timezone.utc).strftime("%Y.%m.%d")
     bg = base64.b64encode((pathlib.Path(__file__).parent / "telemetry_bg.jpg").read_bytes()).decode()
     s = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" '
-         f'aria-label="Stats: {cal["totalContributions"]} public contributions in the last 12 months, {repos["totalCount"]} original public repositories, 2 awards, 5 client verticals at MaxflowAI.">',
+         f'aria-label="Stats: 3 roles since 2024, {repos["totalCount"]} original public repositories, 2 awards, 5 client verticals at MaxflowAI.">',
          f'<defs><clipPath id="f"><rect width="{W}" height="{H}" rx="6"/></clipPath></defs>',
          f'<g clip-path="url(#f)"><rect width="{W}" height="{H}" fill="#12061F"/>',
          f'<image href="data:image/jpeg;base64,{bg}" width="{W}" height="{H}" preserveAspectRatio="xMidYMid slice" opacity="0.55"/>',
@@ -208,7 +208,7 @@ def render(user: dict) -> str:
     s.append(f'<rect x="30" y="80" width="{W - 60}" height="1" fill="{STEEL}" opacity="0.6"/>')
     s.append(f'<rect x="30" y="80" width="160" height="2" fill="{PERI}"/>')
     metrics = [
-        (f"{cal['totalContributions']:02d}", "CONTRIBUTIONS", "LAST 12 MONTHS"),
+        ("03", "ROLES", "SINCE 2024"),
         (f"{repos['totalCount']:02d}", "ORIGINAL REPOS", "EXCL. FORKS"),
         ("02", "AWARDS", "HACKATHON + BME"),
         ("05", "CLIENT VERTICALS", "AT MAXFLOWAI"),
