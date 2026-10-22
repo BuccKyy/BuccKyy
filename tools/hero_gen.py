@@ -7,6 +7,10 @@ Run: python3 tools/hero_gen.py
 """
 import base64
 import pathlib
+import sys
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from panels_gen import photo  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 FONT = base64.b64encode((ROOT / "tools/fonts/BarlowCondensed-Medium.ttf").read_bytes()).decode()
@@ -59,6 +63,8 @@ def comets():
     return "\n".join(out)
 
 
+HERO = photo("kv4", .0, .07, 1.0, 1000, 440, q=78, scale=1.4)
+
 SVG = f"""<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="440" viewBox="0 0 1000 440" role="img" aria-labelledby="t d">
 <title id="t">BuccKyy — AI Engineer</title>
 <desc id="d">Animated violet and orange sunset battle scene with a mobile suit, a cyan beam and flares.</desc>
@@ -66,7 +72,7 @@ SVG = f"""<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="440" view
 @font-face{{font-family:BC;src:url(data:font/ttf;base64,{FONT})}}
 .ti{{font-family:BC,'Arial Narrow',sans-serif;letter-spacing:.22em}}
 #scene{{animation:grade 14s ease-in-out infinite}}
-@keyframes grade{{0%{{filter:grayscale(1) brightness(.55)}}9%{{filter:grayscale(0) brightness(1) saturate(1.25)}}93%{{filter:grayscale(0) brightness(1) saturate(1.25)}}100%{{filter:grayscale(.6) brightness(.4)}}}}
+@keyframes grade{{0%{{filter:brightness(2.2) saturate(1.6)}}7%{{filter:none}}93%{{filter:none}}100%{{filter:brightness(.35)}}}}
 #world{{transform-origin:500px 260px;animation:zoom 14s ease-out infinite}}
 @keyframes zoom{{0%{{transform:scale(1.14)}}100%{{transform:scale(1)}}}}
 #mech{{animation:float 5s ease-in-out infinite}}
@@ -107,6 +113,8 @@ SVG = f"""<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="440" view
 <linearGradient id="pil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE9A8" stop-opacity="0"/><stop offset=".55" stop-color="#FFD56A"/><stop offset="1" stop-color="#FFB35C" stop-opacity="0"/></linearGradient>
 <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1"><stop offset=".55" stop-color="#0B0414" stop-opacity="0"/><stop offset="1" stop-color="#0B0414" stop-opacity=".95"/></linearGradient>
 <linearGradient id="ttl" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFF1B8"/><stop offset=".5" stop-color="#FFB35C"/><stop offset="1" stop-color="#FF5C9A"/></linearGradient>
+<linearGradient id="tn" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7A2BA8" stop-opacity=".25"/><stop offset="1" stop-color="#FF9A5C" stop-opacity=".12"/></linearGradient>
+<linearGradient id="lft" x1="0" x2="1"><stop offset="0" stop-color="#0B0414" stop-opacity=".7"/><stop offset="1" stop-color="#0B0414" stop-opacity="0"/></linearGradient>
 <filter id="blur" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="14"/></filter>
 <filter id="blur2"><feGaussianBlur stdDeviation="3"/></filter>
 <pattern id="sl" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="1" fill="#fff" fill-opacity=".05"/></pattern>
@@ -116,22 +124,13 @@ SVG = f"""<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="440" view
 </defs>
 <g clip-path="url(#frame)">
 <g id="scene">
-<rect width="1000" height="440" fill="url(#sky)"/>
 <g id="world">
-  <g class="cloud" filter="url(#blur)" opacity=".7"><ellipse cx="180" cy="250" rx="220" ry="34" fill="#FF5C9A"/><ellipse cx="760" cy="200" rx="260" ry="30" fill="#B83A9E"/></g>
-  <rect class="pillar" x="540" y="0" width="120" height="400" fill="url(#pil)" filter="url(#blur)"/>
-  <g fill="none" stroke="#FFB0D0" stroke-opacity=".45" stroke-width="1.6"><path class="chalk" d="M40 260 L120 90 L210 210 L300 40 L330 160"/><path class="chalk" d="M640 60 L760 200 L700 40 L880 150 L840 30" style="animation-delay:-2s"/></g>
-  <path d="M120 330 Q250 250 430 262 Q600 270 690 300 Q820 330 1000 318 L1000 440 L120 440Z" fill="url(#mesa)" opacity=".95"/>
-  <path d="M0 360 Q160 320 300 350 Q420 372 520 352 L520 440 L0 440Z" fill="#3B0F44" opacity=".85"/>
+  <image href="{HERO}" width="1000" height="440" preserveAspectRatio="xMidYMid slice"/>
+  <rect width="1000" height="440" fill="url(#tn)"/>
   {comets()}
-  <polygon class="beam" points="300,-10 340,-10 740,300 680,320" fill="url(#beamg)" filter="url(#blur2)"/>
-  <polygon class="beam" points="315,-10 330,-10 715,305 695,312" fill="#F2FEFF"/>
-  {mech()}
-  <polygon points="560,440 650,310 770,278 890,330 1000,296 1000,440" fill="url(#armor2)" stroke="#FF9A5C" stroke-opacity=".8"/>
-  <polygon points="720,440 790,350 860,360 900,440" fill="#4B2E8A" opacity=".55"/>
-  <polygon points="540,440 600,372 690,360 700,440" fill="#3A1A3A" opacity=".6"/>
 </g>
 <rect width="1000" height="440" fill="url(#fade)"/>
+<rect width="620" height="440" fill="url(#lft)"/>
 </g>
 <rect class="scan" y="0" width="1000" height="120" fill="#fff" fill-opacity=".035"/>
 <rect width="1000" height="440" fill="url(#sl)"/>
