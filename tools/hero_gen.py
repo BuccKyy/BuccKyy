@@ -134,8 +134,6 @@ SVG = f"""<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="440" view
 </g>
 <rect class="scan" y="0" width="1000" height="120" fill="#fff" fill-opacity=".035"/>
 <rect width="1000" height="440" fill="url(#sl)"/>
-<rect class="bar-t" width="1000" height="26" fill="#07020D"/>
-<rect class="bar-b" y="414" width="1000" height="26" fill="#07020D"/>
 <path d="M18 40V30H32M968 30H982V40M982 400V410H968M32 410H18V400" fill="none" stroke="#7FE7FF" stroke-width="2" opacity=".9"/>
 <text class="ti" x="44" y="372" font-size="62" fill="url(#ttl)" clip-path="url(#c1)">BUCCKYY</text>
 <text class="ti" x="46" y="403" font-size="15" fill="#7FE7FF" clip-path="url(#c2)">AGENTIC AI ENGINEER // MAXFLOW-AI // HO CHI MINH</text>

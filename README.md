@@ -9,14 +9,14 @@
   <img width="100%" src="./assets/hero.svg" alt="BuccKyy — AI Engineer / LLM Systems. Mobile-suit interface close-up." />
 </p>
 
-<p align="center">
-  <a href="https://bucckyy.github.io"><img src="./assets/cta-portfolio.svg" width="560" alt="Enter portfolio" /></a>
-</p>
+<a href="https://bucckyy.github.io"><img src="./assets/cta-portfolio.svg" width="100%" alt="Enter portfolio" /></a>
 
-<p align="center">
-  <a href="https://github.com/BuccKyy?tab=repositories"><img src="./assets/cta-repos.svg" width="272" alt="Repositories" /></a>
-  <a href="mailto:trantrungduc313@gmail.com"><img src="./assets/cta-contact.svg" width="272" alt="Contact" /></a>
-</p>
+<table width="100%">
+<tr>
+<td width="50%"><a href="https://github.com/BuccKyy?tab=repositories"><img src="./assets/cta-repos.svg" width="100%" alt="Repositories" /></a></td>
+<td width="50%"><a href="mailto:trantrungduc313@gmail.com"><img src="./assets/cta-contact.svg" width="100%" alt="Contact" /></a></td>
+</tr>
+</table>
 
 <img width="100%" src="./assets/sec-01-pilot.svg" alt="_01 PILOT" />
 
