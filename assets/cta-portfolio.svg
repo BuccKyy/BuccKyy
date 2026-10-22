@@ -9,14 +9,14 @@
 @keyframes pl{0%,100%{opacity:.25}50%{opacity:1}}
 </style>
 <defs>
-<linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#00A0E9" stop-opacity=".0"/><stop offset=".5" stop-color="#7FE7FF" stop-opacity=".28"/><stop offset="1" stop-color="#00A0E9" stop-opacity="0"/></linearGradient>
+<linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#FF5C9A" stop-opacity=".0"/><stop offset=".5" stop-color="#FFD56A" stop-opacity=".4"/><stop offset="1" stop-color="#FF9A5C" stop-opacity="0"/></linearGradient>
 <clipPath id="c"><rect x="1" y="1" width="558" height="82"/></clipPath>
 </defs>
-<rect x="1" y="1" width="558" height="82" fill="#00041C" stroke="#8FA3B5" stroke-opacity=".5"/>
+<rect x="1" y="1" width="558" height="82" fill="#1A0830" stroke="#FF9A5C" stroke-opacity=".7"/>
 <g clip-path="url(#c)"><rect class="sweep" x="0" y="0" width="80" height="84" fill="url(#g)"/></g>
 <path d="M1 14V1H14M546 1H559V14M559 70V83H546M14 83H1V70" fill="none" stroke="#7FE7FF" stroke-width="2"/>
 <circle class="pulse" cx="34" cy="42" r="5" fill="#7FE7FF"/>
 <text class="s" x="52" y="30">SEC.00 // LAUNCH</text>
 <text class="t" x="52" y="62">ENTER PORTFOLIO</text>
-<path d="M500 30l22 12-22 12" fill="none" stroke="#AEB8F0" stroke-width="3"/>
+<path d="M500 30l22 12-22 12" fill="none" stroke="#FFD56A" stroke-width="3"/>
 </svg>

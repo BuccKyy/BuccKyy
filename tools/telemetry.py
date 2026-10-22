@@ -21,13 +21,13 @@ from fontTools.ttLib import TTFont
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FONTS = os.path.join(ROOT, "tools", "fonts")
 
-VOID = "#020305"
-NAVY = "#00041C"
-STEEL = "#27455C"
+VOID = "#12061F"
+NAVY = "#1A0830"
+STEEL = "#8A3A8F"
 MIST = "#EAEAEA"
-DIM = "#7C8AA0"
-PERI = "#AEB8F0"
-CYAN = "#00A0E9"
+DIM = "#C9A4E8"
+PERI = "#FF9A5C"
+CYAN = "#FFB347"
 CYAN_HOT = "#7FE7FF"
 GOLD = "#C8A44D"
 
@@ -200,8 +200,8 @@ def render(user: dict) -> str:
     )
     s.append(
         f'<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">'
-        f'<stop offset="0" stop-color="#02050A"/><stop offset="0.6" stop-color="{VOID}"/>'
-        f'<stop offset="1" stop-color="#04080F"/></linearGradient>'
+        f'<stop offset="0" stop-color="#12061F"/><stop offset="0.6" stop-color="{VOID}"/>'
+        f'<stop offset="1" stop-color="#12061F"/></linearGradient>'
     )
     s.append(
         f'<pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse">'
@@ -259,9 +259,9 @@ def render(user: dict) -> str:
     grid = weeks[-53:]
     x0, y0 = 548, 218
     buckets = [
-        (0, "#101B26"),
-        (2, "#1B3C52"),
-        (5, "#176A92"),
+        (0, "#1E0B33"),
+        (2, "#4A1A66"),
+        (5, "#B8337A"),
         (9, CYAN),
         (10**9, CYAN_HOT),
     ]
