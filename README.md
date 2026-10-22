@@ -50,7 +50,7 @@
 <img width="100%" src="./assets/sec-04-telemetry.svg?v=20261022d" alt="_05 RECORD: stats and timeline" />
 
 <img width="100%" src="./assets/telemetry.svg?v=20261022d" alt="Stats: public contributions in the last 12 months, original public repositories, 2 awards, 5 client verticals at MaxflowAI." />
-<img width="100%" src="https://live-activity.vercel.app/activity.svg" alt="Live GitHub activity from public repositories: contributions in the last 90 days, active days, current streak and the latest pushes. Source: github.com/BuccKyy/live-activity" />
+<img width="100%" src="https://live-activity.vercel.app/activity.svg" alt="Contributions in the last 12 months from public repositories: yearly calendar, active days, longest and current streak, best day. Source: github.com/BuccKyy/live-activity" />
 <img width="100%" src="./assets/panel-timeline.svg" alt="Timeline 2021 to now: B.Eng. Electronics and Telecom 2021-2025; ITR VN intern Nov 2024 to Jan 2025; SNOW Vietnam Apr to Oct 2025; MaxflowAI from 2026; 2025 awards. Most client work lives in private repositories." />
 
 <img width="100%" src="./assets/sec-05-comms.svg?v=20261022d" alt="_06 CONTACT" />
